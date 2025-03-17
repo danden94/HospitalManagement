@@ -1,9 +1,5 @@
-USE HospitalManagement;
-GO
-
 CREATE TABLE Doctors (
     DoctorID INT PRIMARY KEY IDENTITY(1,1),
-    FullName NVARCHAR(100) NOT NULL,
+    FullName NVARCHAR(100) NOT NULL UNIQUE,
     Specialty NVARCHAR(100) NOT NULL
 );
-GO

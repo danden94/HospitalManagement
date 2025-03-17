@@ -1,11 +1,9 @@
-USE HospitalManagement;
-GO
-
 CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
-    PatientID INT FOREIGN KEY REFERENCES Patients(PatientID),
-    DoctorID INT FOREIGN KEY REFERENCES Doctors(DoctorID),
-	AppointmentDate DATETIME NOT NULL,
-	Status NVARCHAR(50) NOT NULL
+    PatientID INT NOT NULL,
+    DoctorID INT NOT NULL,
+	AppointmentDate DATETIME NOT NULL CHECK (AppointmentDate >= GETDATE()),
+	Status NVARCHAR(50) NOT NULL CHECK (Status IN ('Chờ', 'Đã khám', 'Huỷ')),
+	CONSTRAINT FK_Appointments_Patients FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+	CONSTRAINT FK_Appointments_Doctors FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
 );
-GO
